@@ -1,0 +1,259 @@
+object fmDetails: TfmDetails
+  OnCreate = fgFormCreate
+  OnKey = fgFormKey
+  OnShow = fgFormShow
+  OnSafeAreaChanged = fgFormSafeAreaChanged
+  Size.Width = 360.000000000000000000
+  Size.Height = 590.000000000000000000
+  OnDestroy = fgFormDestroy
+  SavedSizeWidth = 360s
+  SavedSizeHeight = 590s
+  object loNav: TfgLayout
+    Padding.Top = 24.000000000000000000
+    PositionMode = Relative
+    RelativePosition.Left = 136.000000000000000000
+    RelativePosition.Top = 88.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 80.000000000000000000
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 80s
+    object btnBack: TfgButton
+      ImageName = 'Back'
+      ImageLocation = Center
+      Kind = Flat
+      PositionMode = Relative
+      Position.Y = 24.000000000000000000
+      RelativePosition.Left = 40.000000000000000000
+      RelativePosition.Top = 40.000000000000000000
+      Size.Width = 56.000000000000000000
+      Size.Height = 56.000000000000000000
+      OnTap = btnBackTap
+      SavedSizeWidth = 56s
+      SavedSizeHeight = 40s
+    end
+  end
+  object loInfo: TfgLayout
+    AlignmentChildren.Direction = Column
+    Alignment.FlexGrow = 1.000000000000000000
+    PositionMode = Relative
+    Position.X = 16.000000000000000000
+    Position.Y = 80.000000000000000000
+    RelativePosition.Left = 152.000000000000000000
+    RelativePosition.Top = 496.000000000000000000
+    Size.Width = 328.000000000000000000
+    Size.Height = 167.000000000000000000
+    Margins.Left = 16.000000000000000000
+    Margins.Right = 16.000000000000000000
+    Margins.Bottom = 16.000000000000000000
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 50s
+    object lbUNPTitle: TfgLabel
+      Text = #1059#1053#1055':'
+      ColorName = 'Colors\SecondaryText'
+      Font.Family = 'Product Sans Regular'
+      Font.Default = [Size, Style]
+      HorzAlign = Center
+      PositionMode = Relative
+      RelativePosition.Left = 120.000000000000000000
+      RelativePosition.Top = 96.000000000000000000
+      Size.Width = 328.000000000000000000
+      Size.Height = 24.000000000000000000
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 24s
+    end
+    object lbUNP: TfgLabel
+      ColorName = 'Colors\PrimaryText'
+      Font.Family = 'Product Sans Bold'
+      Font.Default = [Size, Style]
+      HorzAlign = Center
+      PositionMode = Relative
+      Position.Y = 24.000000000000000000
+      RelativePosition.Left = 120.000000000000000000
+      RelativePosition.Top = 96.000000000000000000
+      Size.Width = 328.000000000000000000
+      Size.Height = 24.000000000000000000
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 24s
+    end
+    object lbDateTitle: TfgLabel
+      Text = #1044#1072#1090#1072':'
+      ColorName = 'Colors\SecondaryText'
+      Font.Family = 'Product Sans Regular'
+      Font.Default = [Size, Style]
+      HorzAlign = Center
+      PositionMode = Relative
+      Position.Y = 52.000000000000000000
+      RelativePosition.Left = 120.000000000000000000
+      RelativePosition.Top = 96.000000000000000000
+      Size.Width = 328.000000000000000000
+      Size.Height = 24.000000000000000000
+      Margins.Top = 4.000000000000000000
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 24s
+    end
+    object lbDate: TfgLabel
+      ColorName = 'Colors\PrimaryText'
+      Font.Family = 'Product Sans Bold'
+      Font.Default = [Size, Style]
+      HorzAlign = Center
+      PositionMode = Relative
+      Position.Y = 76.000000000000000000
+      RelativePosition.Left = 120.000000000000000000
+      RelativePosition.Top = 96.000000000000000000
+      Size.Width = 328.000000000000000000
+      Size.Height = 24.000000000000000000
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 24s
+    end
+    object lbCompanyTitle: TfgLabel
+      Text = #1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103':'
+      ColorName = 'Colors\SecondaryText'
+      Font.Family = 'Product Sans Regular'
+      Font.Default = [Size, Style]
+      HorzAlign = Center
+      PositionMode = Relative
+      Position.Y = 104.000000000000000000
+      RelativePosition.Left = 120.000000000000000000
+      RelativePosition.Top = 96.000000000000000000
+      Size.Width = 328.000000000000000000
+      Size.Height = 24.000000000000000000
+      Margins.Top = 4.000000000000000000
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 24s
+    end
+    object lbCompany: TfgLabel
+      ColorName = 'Colors\PrimaryText'
+      Font.Family = 'Product Sans Bold'
+      Font.Default = [Size, Style]
+      LinesCount = 10
+      LineBreak = WordWrap
+      HorzAlign = Center
+      PositionMode = Relative
+      Position.Y = 128.000000000000000000
+      RelativePosition.Left = 120.000000000000000000
+      RelativePosition.Top = 96.000000000000000000
+      Size.Width = 328.000000000000000000
+      Size.Height = 24.000000000000000000
+      SavedSizeWidth = 82s
+      SavedSizeHeight = 24s
+    end
+  end
+  object spSpacer: TfgSpacer
+    Alignment.AlignSelf = Stretch
+    Alignment.FlexGrow = 1.000000000000000000
+    PositionMode = Relative
+    Position.Y = 263.000000000000000000
+    RelativePosition.Left = 0.000000000000000000
+    RelativePosition.Top = 0.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 15.000000000000000000
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 50s
+  end
+  object loExcise: TfgLayout
+    AlignmentChildren.JustifyContent = Center
+    PositionMode = Relative
+    Position.Y = 278.000000000000000000
+    RelativePosition.Left = 144.000000000000000000
+    RelativePosition.Top = 200.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 256.000000000000000000
+    SavedSizeWidth = 50s
+    SavedSizeHeight = 256s
+    object loExciseCenter: TfgLayout
+      Alignment.AlignSelf = Center
+      PositionMode = Relative
+      Position.X = 52.000000000000000000
+      RelativePosition.Left = 208.000000000000000000
+      RelativePosition.Top = 72.000000000000000000
+      Size.Width = 256.000000000000000000
+      Size.Height = 256.000000000000000000
+      SavedSizeWidth = 256s
+      SavedSizeHeight = 256s
+      object imExcise: TfgImage
+        ImageName = 'Excise_256'
+        Locked = True
+        RelativePosition.DefinedValues = [Left, Top, Right, Bottom]
+        RelativePosition.Left = 0.000000000000000000
+        RelativePosition.Top = 0.000000000000000000
+        RelativePosition.Right = 0.000000000000000000
+        RelativePosition.Bottom = 0.000000000000000000
+        Size.Width = 256.000000000000000000
+        Size.Height = 256.000000000000000000
+        Opacity = 0.500000000000000000
+        SavedSizeWidth = 50s
+        SavedSizeHeight = 50s
+      end
+      object lbNumber: TfgLabel
+        ColorName = 'Colors\PrimaryText'
+        Font.Family = 'Product Sans Bold'
+        Font.Size = 18.000000000000000000
+        Font.Default = [Style]
+        HorzAlign = Center
+        Position.X = 16.000000000000000000
+        Position.Y = 172.000000000000000000
+        RelativePosition.DefinedValues = [Left, Top, Right]
+        RelativePosition.Left = 16.000000000000000000
+        RelativePosition.Top = 172.000000000000000000
+        RelativePosition.Right = 16.000000000000000000
+        Size.Width = 224.000000000000000000
+        Size.Height = 32.000000000000000000
+        SavedSizeWidth = 82s
+        SavedSizeHeight = 32s
+      end
+      object lbTitle: TfgLabel
+        ColorName = 'Colors\PrimaryText'
+        Font.Family = 'Product Sans Bold'
+        Font.Size = 18.000000000000000000
+        Font.Default = [Style]
+        LinesCount = 4
+        LineBreak = WordWrap
+        HorzAlign = Center
+        Position.X = 16.000000000000000000
+        Position.Y = 40.000000000000000000
+        RelativePosition.DefinedValues = [Left, Top, Right]
+        RelativePosition.Left = 16.000000000000000000
+        RelativePosition.Top = 40.000000000000000000
+        RelativePosition.Right = 16.000000000000000000
+        Size.Width = 224.000000000000000000
+        Size.Height = 80.000000000000000000
+        SavedSizeWidth = 82s
+        SavedSizeHeight = 80s
+      end
+      object lbCodeSerie: TfgLabel
+        ColorName = 'Colors\PrimaryText'
+        Font.Family = 'Product Sans Bold'
+        Font.Size = 18.000000000000000000
+        Font.Default = [Style]
+        HorzAlign = Center
+        Alignment.FlexGrow = 1.000000000000000000
+        Position.X = 16.000000000000000000
+        Position.Y = 132.000000000000000000
+        RelativePosition.DefinedValues = [Left, Top, Right]
+        RelativePosition.Left = 16.000000000000000000
+        RelativePosition.Top = 132.000000000000000000
+        RelativePosition.Right = 16.000000000000000000
+        Size.Width = 224.000000000000000000
+        Size.Height = 32.000000000000000000
+        SavedSizeWidth = 82s
+        SavedSizeHeight = 32s
+      end
+    end
+  end
+  object lbCheckDate: TfgLabel
+    ColorName = 'Colors\SecondaryText'
+    Font.Family = 'Product Sans Regular'
+    Font.Default = [Size, Style]
+    HorzAlign = Center
+    PositionMode = Relative
+    Position.Y = 550.000000000000000000
+    RelativePosition.Left = 120.000000000000000000
+    RelativePosition.Top = 96.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 24.000000000000000000
+    Margins.Top = 16.000000000000000000
+    Margins.Bottom = 16.000000000000000000
+    SavedSizeWidth = 82s
+    SavedSizeHeight = 24s
+  end
+end
