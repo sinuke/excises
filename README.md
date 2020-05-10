@@ -7,8 +7,8 @@
  Приложение доступно для установки в Google Play по ссылке - https://excise.page.link/amTC
  
 ## Скриншоты:
- ![00]()
- ![01]()
- ![02]()
- ![03]()
+ ![00](https://github.com/sinuke/excises/blob/master/Scr/00.png)
+ ![01](https://github.com/sinuke/excises/blob/master/Scr/01.png)
+ ![02](https://github.com/sinuke/excises/blob/master/Scr/02.png)
+ ![03](https://github.com/sinuke/excises/blob/master/Scr/03.png)
  
