@@ -31,13 +31,14 @@ type
     function ToString: string; override;
     procedure LoadFormJsonObject(const AJson: string);
   end;
-
+  {
   TExcisesList = TObjectList<TExciseItem>;
 
   TExcises = class(TExcisesList)
-  public
-    function ToString: string; override;
   end;
+  }
+
+  TExcises = TObjectList<TExciseItem>;
 
   TSettings = class
   private
@@ -135,28 +136,6 @@ begin
   end;
 end;
 
-{ TExcises }
-
-function TExcises.ToString: string;
-var
-  LJsonArr: TJSONArray;
-  LJsonArrObj: TJSONObject;
-  i: Integer;
-begin
-  Result := '[]';
-  LJsonArr := TJSONArray.Create;
-  try
-    for i := 0 to Count - 1 do
-      begin
-        LJsonArrObj := TJSONObject.ParseJSONValue(Items[i].ToString, False, True) as TJSONObject;
-        LJsonArr.AddElement(LJsonArrObj);
-      end;
-    Result := LJsonArr.ToString;
-  finally
-    FreeAndNil(LJsonArr);
-  end;
-end;
-
 { TSettings }
 
 constructor TSettings.Create;
@@ -212,17 +191,29 @@ end;
 procedure TSettings.SaveToFile(const AFileName: string);
 var
   LJsonObj: TJSONObject;
+  LJsonArr: TJSONArray;
+  LJsonArrObj: TJSONObject;
+  i: Integer;
 begin
   LJsonObj := TJSONObject.Create;
+  LJsonArr := TJSONArray.Create;
   try
     LJsonObj.AddPair('lastcode', FLastCode);
     LJsonObj.AddPair('lastserie', FLastSerie);
     LJsonObj.AddPair('lastnumber', FLastNumber);
-    LJsonObj.AddPair('excises', FExcises.ToString);
+
+    for i := 0 to FExcises.Count - 1 do
+      begin
+        LJsonArrObj := TJSONObject.ParseJSONValue(FExcises[i].ToString, False, True) as TJSONObject;
+        LJsonArr.AddElement(LJsonArrObj);
+      end;
+    LJsonObj.AddPair('excises', LJsonArr);
+
+    TFile.WriteAllText(AFileName, LJsonObj.ToString, TEncoding.UTF8);
   finally
     FreeAndNil(LJsonObj);
+    FreeAndNil(LJsonArr);
   end;
-  TFile.WriteAllText(AFileName, LJsonObj.ToString, TEncoding.UTF8);
 end;
 
 end.

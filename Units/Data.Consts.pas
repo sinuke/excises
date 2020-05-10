@@ -29,6 +29,12 @@ const
 
   MSG_TOAST: string = 'Нажмите ещё раз для выхода';
 
+  COPYRIGHT: string = 'Copyright © 2016 - %d sinuke apps';
+  VERSION: string = 'Версия: %s';
+
+  FGX_URL: string = 'http://fgx-native.com/';
+  MAIL_TO: string = 'mailto:sinapps23@gmail.com?subject=Проверка контрольных знаков';
+
 implementation
 
 end.

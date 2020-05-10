@@ -74,8 +74,8 @@ end;
 procedure TfmAbout.fgFormCreate(Sender: TObject);
 begin
   IsAnimating := False;
-  lbCopyright.Text := Format('Copyright © 2016 - %d sinuke apps', [YearOf(Now)]);
-  lbVersion.Text := Format('Версия: %s', [Application.Info.Version]);
+  lbCopyright.Text := Format(COPYRIGHT, [YearOf(Now)]);
+  lbVersion.Text := Format(VERSION, [Application.Info.Version]);
 end;
 
 procedure TfmAbout.fgFormKey(Sender: TObject; const AKey: TfgKey; var AHandled: Boolean);
@@ -97,12 +97,12 @@ end;
 
 procedure TfmAbout.imFGXTap(Sender: TObject);
 begin
-  Application.OpenURL('http://fgx-native.com/');
+  Application.OpenURL(FGX_URL);
 end;
 
 procedure TfmAbout.lbMailToTap(Sender: TObject);
 begin
-  Application.OpenURL('mailto:sinapps23@gmail.com?subject=Проверка контрольных знаков');
+  Application.OpenURL(MAIL_TO);
 end;
 
 end.

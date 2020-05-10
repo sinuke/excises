@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{663A504A-6A8E-4A87-B70E-2AEC60EFE275}</ProjectGuid>
+        <ProjectGuid>{663A504A-6A8E-4A87-B70E-2AEC60EFE276}</ProjectGuid>
         <ProjectVersion>18.8</ProjectVersion>
         <FrameworkType>xfm</FrameworkType>
         <MainSource>excise.dpr</MainSource>
