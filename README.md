@@ -5,6 +5,10 @@
  ## Google Play
  
  Приложение доступно для установки в Google Play по ссылке - https://excise.page.link/amTC
+
+ ## Huawei AppGallery
+
+ Приложение доступно для установки в Huawei AppGallery по ссылке - https://excise.page.link/89eQ
  
 ## Скриншоты:
  ![00](https://github.com/sinuke/excises/blob/master/Scr/00.png)
