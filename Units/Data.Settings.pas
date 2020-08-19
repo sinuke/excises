@@ -31,12 +31,6 @@ type
     function ToString: string; override;
     procedure LoadFormJsonObject(const AJson: string);
   end;
-  {
-  TExcisesList = TObjectList<TExciseItem>;
-
-  TExcises = class(TExcisesList)
-  end;
-  }
 
   TExcises = TObjectList<TExciseItem>;
 
@@ -212,7 +206,7 @@ begin
     TFile.WriteAllText(AFileName, LJsonObj.ToString, TEncoding.UTF8);
   finally
     FreeAndNil(LJsonObj);
-    FreeAndNil(LJsonArr);
+    //FreeAndNil(LJsonArr);
   end;
 end;
 

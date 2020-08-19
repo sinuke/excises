@@ -72,10 +72,7 @@ procedure TfmDetails.CloseForm;
 begin
   IsAnimating := True;
   TfgAnimationHelper.HideForm(Self, [TfgAnimationOption.StartFromCurrent, TfgAnimationOption.ReleaseOnFinish],
-    ANIMATION_DIRATION,
-    procedure
-    begin
-    end);
+    ANIMATION_DIRATION);
 end;
 
 procedure TfmDetails.fgFormCreate(Sender: TObject);
@@ -139,7 +136,7 @@ begin
                                                      TfgMeasuringSpecification.Unspecified, 0).Height;
       lbCompany.Realign;
 
-      lbCheckDate.Text := 'Проверка: ' + FormatDateTime('yyyy.mm.dd hh:nn:ss', FExcise.CheckingDate);
+      lbCheckDate.Text := 'Проверено: ' + FormatDateTime('yyyy.mm.dd hh:nn:ss', FExcise.CheckingDate);
     end;
 end;
 

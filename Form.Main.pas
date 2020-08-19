@@ -76,7 +76,6 @@ type
       const AItem: TfgItemWrapper);
     procedure cvExcisesTapItem(Sender: TObject; const AIndex: Integer);
     procedure fgFormKey(Sender: TObject; const AKey: TfgKey; var AHandled: Boolean);
-    procedure cpCheckDataTap(Sender: TObject);
     procedure btnMessageOKTap(Sender: TObject);
   private
     { Private declarations }
@@ -148,7 +147,7 @@ uses
   Androidapi.Jni,
   Android.Api.Camera,
   Android.Api.Widgets,
-  Java.Bridge.Helpers,
+  Java.Bridge,
   Assets.Consts,
   Form.Details,
   Form.About,
@@ -207,7 +206,6 @@ begin
           loCheckBackground.Opacity := 0;
           loCheckBackground.Visible := True;
 
-
           cpCheckData.BackgroundColorName := R.Color.COLORS_WHITE;
           TfgPanelAnimation.ShowPanel(cpCheckData, - 206, ANIMATION_DIRATION,
             procedure
@@ -227,7 +225,7 @@ begin
         end;
     end
   else
-  if (btnUpOrAbout.ImageName = R.Bitmap.ABOUT) and (not FLoading) and (not IsAnimating) then
+  if (btnUpOrAbout.ImageName = R.Bitmap.ABOUT) and (not FLoading) and (not IsAnimating) and (Sender is TfgButton) then
     ShowAbout;
 end;
 
@@ -264,11 +262,6 @@ begin
           loCheckBackground.Visible := False;
         end);
     end;
-end;
-
-procedure TfmMain.cpCheckDataTap(Sender: TObject);
-begin
-  //
 end;
 
 procedure TfmMain.cvExcisesBindItem(Sender: TObject; const AIndex: Integer; const AStyle: string;
@@ -522,7 +515,7 @@ end;
 
 procedure TfmMain.fgFormShow(Sender: TObject);
 var
-  LEdit: TJEditText;
+  LEdit: JEditText;
 begin
   edCode.Text := FSettings.LastCode;
   edNumber.Text := FSettings.LastNumber;
@@ -658,12 +651,23 @@ var
   XML: TXMLDocument;
   ResultNode: IXMLNode;
 begin
+  Result := False;
   XML := TXMLDocument.Create(Self);
   try
-    XML.LoadFromXML(AXml);
+    try
+      XML.LoadFromXML(AXml);
+    except
+      FreeAndNil(XML);
+    end;
+
     XML.Active := True;
 
-    ResultNode := XML.ChildNodes[0].ChildNodes[0].ChildNodes[0].ChildNodes[0];
+    try
+      ResultNode := XML.ChildNodes[0].ChildNodes[0].ChildNodes[0].ChildNodes[0];
+    except
+      FreeAndNil(XML);
+    end;
+
     if ResultNode.HasChildNodes then
       begin
         if string.ToInteger(ResultNode.ChildNodes['IsFound'].Text) > 0 then
@@ -673,11 +677,7 @@ begin
             ADate := ResultNode.ChildNodes['Rel'].ChildNodes['WSRel'].ChildNodes['Date'].Text;
             Result := True;
           end
-        else
-          Result := False;
-      end
-    else
-      Result := False;
+      end;
   finally
     XML.Active := False;
     ResultNode := nil;

@@ -7,26 +7,24 @@ uses Android.Api.Network;
 type
   TActiveNetworkInfo = class
   private
-    class var FJConnectivityManager: TJConnectivityManager;
+    class var FJConnectivityManager: JConnectivityManager;
     class constructor Create;
+    class function GetNetwork: JNetwork;
   public
     /// <summary>Check permission "android.permission.ACCESS_NETWORK_STATE"</summary>
     class function CheckPermission: Boolean;
-    /// <summary>Returns details about the currently active default data network.</summary>
-    class function GetInfo: TJNetworkInfo;
     /// <summary>Indicates whether network connectivity exists and it is possible to establish connections and pass data.</summary>
     class function IsConnected: Boolean;
-    /// <summary>Return a human-readable name describe the type of the network, for example "WIFI" or "MOBILE".</summary>
-    class function GetTypeName: string;
     /// <summary>Is Wi-Fi connection?</summary>
     class function IsWifi: Boolean;
     /// <summary>Is Mobile connection?</summary>
     class function IsMobile: Boolean;
+    /// <summary>Is VPN connection?</summary>
   end;
 
 implementation
 
-uses Java.Bridge.Helpers,
+uses Java.Bridge,
      System.SysUtils,
      Androidapi.JNI,
      Android.Api.JavaTypes,
@@ -68,55 +66,54 @@ begin
       (TfgAndroidHelper.Context.getSystemService(TJContext.CONNECTIVITY_SERVICE));
 end;
 
-class function TActiveNetworkInfo.GetInfo: TJNetworkInfo;
+class function TActiveNetworkInfo.GetNetwork: JNetwork;
 var
-  NetworkInfo: TJNetworkInfo;
+  Network: JNetwork;
 begin
   Result := nil;
   Create;
   if FJConnectivityManager <> nil then
     begin
-      NetworkInfo := FJConnectivityManager.getActiveNetworkInfo();
-      if NetworkInfo <> nil then
-        Result := NetworkInfo;
+      Network := FJConnectivityManager.getActiveNetwork();
+      if Network <> nil then
+        Result := Network;
     end;
 end;
 
 class function TActiveNetworkInfo.IsConnected: Boolean;
-var
-  NetworkInfo: TJNetworkInfo;
 begin
-  NetworkInfo := GetInfo;
-  Result := (NetworkInfo <> nil) and NetworkInfo.IsConnected();
+  Result := IsMobile or IsWifi;
 end;
+
 
 class function TActiveNetworkInfo.IsMobile: Boolean;
 var
-  NetworkInfo: TJNetworkInfo;
+  Network: JNetwork;
+  NetworkCapabilities: JNetworkCapabilities;
 begin
-  NetworkInfo := GetInfo;
-  Result := (NetworkInfo <> nil) and (NetworkInfo.getType() = TJConnectivityManager.TYPE_MOBILE);
+  Network := GetNetwork;
+  if Network <> nil then
+    begin
+      NetworkCapabilities := FJConnectivityManager.getNetworkCapabilities(Network);
+      Result := (NetworkCapabilities <> nil) and (NetworkCapabilities.hasTransport(TJNetworkCapabilities.TRANSPORT_CELLULAR()));
+    end
+  else
+    Result := False;
 end;
 
 class function TActiveNetworkInfo.IsWifi: Boolean;
 var
-  NetworkInfo: TJNetworkInfo;
+  Network: JNetwork;
+  NetworkCapabilities: JNetworkCapabilities;
 begin
-  NetworkInfo := GetInfo;
-  Result := (NetworkInfo <> nil) and (NetworkInfo.getType() = TJConnectivityManager.TYPE_WIFI);
-end;
-
-class function TActiveNetworkInfo.GetTypeName: string;
-const
-  RESULT_NONE = 'NONE';
-var
-  NetworkInfo: TJNetworkInfo;
-begin
-  NetworkInfo := GetInfo;
-  if NetworkInfo <> nil then
-    Result := JStringToString(NetworkInfo.GetTypeName())
+  Network := GetNetwork;
+  if Network <> nil then
+    begin
+      NetworkCapabilities := FJConnectivityManager.getNetworkCapabilities(Network);
+      Result := (NetworkCapabilities <> nil) and (NetworkCapabilities.hasTransport(TJNetworkCapabilities.TRANSPORT_WIFI()));
+    end
   else
-    Result := RESULT_NONE;
+    Result := False;
 end;
 
 end.

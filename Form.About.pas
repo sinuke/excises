@@ -65,10 +65,7 @@ procedure TfmAbout.CloseForm;
 begin
   IsAnimating := True;
   TfgAnimationHelper.HideForm(Self, [TfgAnimationOption.StartFromCurrent, TfgAnimationOption.ReleaseOnFinish],
-    ANIMATION_DIRATION,
-    procedure
-    begin
-    end);
+    ANIMATION_DIRATION);
 end;
 
 procedure TfmAbout.fgFormCreate(Sender: TObject);

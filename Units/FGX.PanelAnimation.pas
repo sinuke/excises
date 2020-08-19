@@ -17,9 +17,9 @@ type
     destructor Destroy; override;
 
     {JAnimation_AnimationListener}
-    procedure onAnimationEnd(const AArg0: TJAnimation);
-    procedure onAnimationRepeat(const AArg0: TJAnimation);
-    procedure onAnimationStart(const AArg0: TJAnimation);
+    procedure onAnimationEnd(const AArg0: JAnimation);
+    procedure onAnimationRepeat(const AArg0: JAnimation);
+    procedure onAnimationStart(const AArg0: JAnimation);
   end;
 
   TfgPanelAnimation = class
@@ -54,17 +54,17 @@ begin
   inherited;
 end;
 
-procedure TTranslateAnimationListener.onAnimationEnd(const AArg0: TJAnimation);
+procedure TTranslateAnimationListener.onAnimationEnd(const AArg0: JAnimation);
 begin
   if Assigned(FFinishCallback) then
     FFinishCallback;
 end;
 
-procedure TTranslateAnimationListener.onAnimationRepeat(const AArg0: TJAnimation);
+procedure TTranslateAnimationListener.onAnimationRepeat(const AArg0: JAnimation);
 begin
 end;
 
-procedure TTranslateAnimationListener.onAnimationStart(const AArg0: TJAnimation);
+procedure TTranslateAnimationListener.onAnimationStart(const AArg0: JAnimation);
 begin
 end;
 
@@ -73,14 +73,14 @@ end;
 class procedure TfgPanelAnimation.HidePanel(const AControl: TfgControl; const AY: Single; const ADuration: Integer;
   const AFinishCallback: TfgCallback);
 var
-  View: TJView;
+  View: JView;
   Listener: TTranslateAnimationListener;
-  Animation: TJTranslateAnimation;
-  Interpolator: TJPathInterpolator;
+  Animation: JTranslateAnimation;
+  Interpolator: JPathInterpolator;
   Scale: Single;
 begin
   Scale := TfgAndroidHelper.ScreenScale;
-  View := AControl.Handle.View;
+  View := TJView.Wrap(AControl.Handle.View);
   Animation := TJTranslateAnimation.Create(0, 0, 0, AY * Scale);
   if ADuration = PlatformDuration then
     Animation.setDuration(TJResources.getSystem.getInteger(TJR_integer.config_shortAnimTime))
@@ -106,8 +106,8 @@ begin
   TfgAutoreleasePool.Store(Interpolator);
   TfgAutoreleasePool.Store(Animation);
 
-  Animation.setInterpolator(Interpolator);
-  Animation.setAnimationListener(Listener);
+  Animation.setInterpolator(TJInterpolator.Wrap(Interpolator));
+  Animation.setAnimationListener(TJAnimation_AnimationListener.Wrap(Listener));
 
   View.startAnimation(Animation);
 end;
@@ -115,10 +115,10 @@ end;
 class procedure TfgPanelAnimation.ShowPanel(const AControl: TfgControl; const AY: Single; const ADuration: Integer;
   const AFinishCallback: TfgCallback);
 var
-  View: TJView;
+  View: JView;
   Listener: TTranslateAnimationListener;
-  Animation: TJTranslateAnimation;
-  Interpolator: TJPathInterpolator;
+  Animation: JTranslateAnimation;
+  Interpolator: JPathInterpolator;
   Scale: Single;
 begin
   Scale := TfgAndroidHelper.ScreenScale;
@@ -147,8 +147,8 @@ begin
   TfgAutoreleasePool.Store(Interpolator);
   TfgAutoreleasePool.Store(Animation);
 
-  Animation.setInterpolator(Interpolator);
-  Animation.setAnimationListener(Listener);
+  Animation.setInterpolator(TJInterpolator.Wrap(Interpolator));
+  Animation.setAnimationListener(TJAnimation_AnimationListener.Wrap(Listener));
 
   View.startAnimation(Animation);
 end;
